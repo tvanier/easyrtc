@@ -99,6 +99,7 @@ function loadAndFilter(url, destDiv, tabSize) {
         else {
             filterStuff(response, destDiv, tabSize);
         }
-    });
+    },
+    'text');
 
 }

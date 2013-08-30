@@ -43,8 +43,16 @@ function connect() {
     easyRTC.enableAudio(document.getElementById('shareAudio').checked);
     easyRTC.enableVideo(document.getElementById('shareVideo').checked);
     easyRTC.setLoggedInListener(convertListToButtons);
-    easyRTC.connect("audioVideo", loginSuccess, loginFailure);
-
+    easyRTC.initMediaSource(
+        function(){        // success callback
+            var selfVideo = document.getElementById("selfVideo");
+            easyRTC.setVideoObjectSrc(selfVideo, easyRTC.getLocalStream());
+            easyRTC.connect("audioVideo", loginSuccess, loginFailure);
+        },
+        function(errmesg){
+            alert(errmesg);
+        }  // failure callback
+        );
 }
 
 
